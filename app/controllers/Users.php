@@ -58,11 +58,13 @@
 				if(empty($data['email_err']) && empty($data['name_err']) 
 					&& empty($data['password_err']) && empty($data['confrim_password_err'])){
 					// Validated
-							// Hash Password
+					
+					// Hash Password
 					$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
 					// Register User
 					if($this->userModel->register($data)){
+						flash('register_success', 'You are registered and can log in');
 						redirect('users/login');
 					} else {
 						die('Something went wrong');
